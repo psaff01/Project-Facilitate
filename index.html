@@ -1,57 +1,48 @@
- <!DOCTYPE html>
- <html lang="en-US">
- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script><!-- pull in angular-->
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script><!-- pull in angular-->
  <script src="https://cdn.firebase.com/js/client/2.4.1/firebase.js"></script> <!--firebase javascript client-->
-  <script src="https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js"></script>  <!-- AngularFire -->
-    
- <body>
-
- <div ng-app="myApp" ng-controller="formCtrl"> <!--the controller governs everything inside the div...so when binding it must be done inside the div-->
-
-<h3>Facilitate</h3>
-  <form novalidate>
-    Username:<br>
-    <input type="text" ng-model="username"><br>
-    Password:<br>
-    <input type="password" ng-model="password">
-    <br><br>
-    <button ng-click="login()">LOGIN</button>
-  </form>
-  
-  <!--<p>username= {{username}}</p> <!-one way to bind-->
-  <!--<p>password = {{password}}</p> -->
-  <!--<p ng-bind="username"></p> <!another way to bind-->
-</div>
-
-<script>
-var app = angular.module('myApp', ["firebase"]);
-app.controller('formCtrl', function($scope) 
-{
-    //$scope.password = {};
-    $scope.login = function() 
-    {
-
-      var ref = new Firebase("https://project-facilitate.firebaseio.com/");
-      ref.authWithPassword({
-        email    : $scope.username,
-        password : $scope.password
-      }, function(error, authData) 
-      {
-        if (error) 
-        {
-          //console.log("Login Failed!", error);
-          //$scope.authenticated = "Failed"
-          console.log(error);
-        } 
-        else 
-        {
-         window.location.href = 'home2.html';
-         }
-      });
-    
-    };
-    //$scope.reset(); //will reset the login input boxes
-});
-</script> 
+ <script src="https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js"></script>  <!-- AngularFire -->
+ <script src="scripts/indexController.js"></script>  
+	
+<head>
+	<title>Facilitate Login</title>
+		<meta charset="utf-8">
+		<link href="css/style.css" rel='stylesheet' type='text/css' />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+		<!--webfonts-->
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,300,600,700' rel='stylesheet' type='text/css'>
+		<!--//webfonts-->
+</head>
+<body ng-app="myApp" ng-controller="formCtrl">
+	
+				 <!-----start-main---->
+				<div class="login-form" ><!---ng-app="myApp" ng-controller="formCtrl">---->
+					<div class="head">
+						<img src="images/mem2.jpg" alt=""/>
+						
+					</div>
+				<form>
+					<li>
+						<input type="text" ng-model="username" class="text" value="USERNAME"  ng-model="username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'USERNAME';}" ><a href="#" class=" icon user" ></a>
+					</li>
+					<li>
+						<input type="password" ng-model="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}"><a href="#" class=" icon lock"></a>
+					</li>
+					<div>
+							<input type="submit" ng-click="login()" value="SIGN IN" >
+							<div class="clear"> </div>
+					</div>
+				</form>
+			</div>
+			<!--//End-login-form-->
+		 		
 </body>
 </html>

@@ -1,0 +1,66 @@
+ <!DOCTYPE html>
+ <html lang="en-US">
+   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script><!-- pull in angular-->
+  <script src="https://cdn.firebase.com/js/client/2.4.1/firebase.js"></script> <!--firebase javascript client-->
+  <script src="https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js"></script>  <!-- AngularFire -->
+  <script src="scripts/loginRedirectController.js"></script>
+  <script src="scripts/contentController.js"></script>
+  <script src="scripts/renterController.js"></script>
+  <head>
+    <title> Facilitate Renter Home</title>
+    <meta charset="utf-8">
+    <link href="css/style.css" rel='stylesheet' type='text/css' />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!--webfonts-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,300,600,700' rel='stylesheet' type='text/css'>
+    <!--//webfonts-->
+  </head>
+
+<body ng-app="renterApp" ng-controller="renterController">
+  <div class="head">
+renter home
+    <div>
+      <form novalidate>
+        Facility Type:<br>
+        <input type="text" ng-model="facility_type">
+        <button ng-click="submit()">Submit</button>
+      </form>
+    </div>
+   
+<div>
+   <form action="" method="POST">
+     <script
+       src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+       data-key="pk_test_SfLrVizVqYXd6IwoKaYyo9BL"
+       data-image="/img/documentation/checkout/marketplace.png"
+       data-name="Facilitate checkout"
+       data-description=""
+       data-amount="25000"
+       data-locale="auto">
+     </script>
+   </form>
+</div>
+  <div>
+     <h3>Requested Viewings:</h3>
+        <ul>
+            <li ng-repeat="obj in facility_requests_data  | filter:{viewing: '!n/a', viewingConfirmed: false}">{{obj.type}}--{{obj.viewing}}</li>
+        </ul>
+  </div>
+
+   <div>
+      <h3>Viewings you have scheduled:</h3>
+        <ul>
+            <li ng-repeat="obj in facility_requests_data  | filter: {viewing: '!n/a', viewingConfirmed: true}">{{obj.type}}--{{obj.viewing}}</li>
+        </ul>
+    </div>
+
+    <div>
+      <h3>Facilities you have booked:</h3>
+        <ul>
+            <li ng-repeat="obj in facility_requests_data  | filter: {booked: true}">{{obj.type}}</li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
