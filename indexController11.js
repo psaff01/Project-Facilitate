@@ -1,12 +1,12 @@
 var app = angular.module('facApp', ["firebase"]);
-app.controller('indexController11', function($scope, $http) 
+app.controller('indexController11', function($scope) 
 {
       var ref = new Firebase("https://project-facilitate.firebaseio.com/");
       
         var authData = ref.getAuth();
             $scope.isAuthenticated = false;
             $scope.authData = authData;
-            $scope.webPost = $http;
+            //$scope.webPost = $http;
            // $scope.serviceType = "snow";
             
             //if we ARE authenticated...
@@ -42,8 +42,8 @@ $scope.submitForm = function()
     $scope.login = function() 
     {
         ref.authWithPassword({
-        email : $scope.username,
-        password : $scope.password
+        email    : this.username,
+        password : this.password
     }, function(error, authData) 
     {
         if (error) 
