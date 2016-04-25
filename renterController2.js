@@ -36,8 +36,9 @@ app.controller('renterController2', function($scope, $firebaseArray)
    
      $scope.newServiceRequest = function(type, hours, instructions, cost)
          {
+             console.log("type" = type);
              //save the new service request to firebase
-             service_requests.push({renter: authData.uid, type: $scope.facility_type, instructions: instructions, cost: cost, hours: hours, provider: "n/a", completed: false});
+             facility_requests.push({renter: authData.uid, type: $scope.facility_type, instructions: instructions, cost: cost, hours: hours, provider: "n/a", completed: false});
          }
 
          $scope.receptionButtonOnClick = function()

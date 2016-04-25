@@ -177,6 +177,71 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         </tr>
                       </table>
             </div>
+                  <div id="main" ng-if="role == 'provider'" ng-controller="providerController">
+                  <table width="50%">
+                    <tr>
+                      <td>
+                        <h3>Requested Viewings:</h3>
+                            <ul>
+                                <li ng-repeat="obj in facility_request_data | filter: {viewing: '!n/a', viewingConfirmed: false}">{{obj.user}}<br> {{obj.type}}--{{obj.viewing}}<button ng-click="claimRequest(obj)">Accept - {{obj.type}}--{{obj.viewing)</button></li>
+                            </ul>
+                      </td>
+                      <td width="50%">
+                        <h3>Confirmed Viewings:</h3>
+                              <ul>
+                                <li ng-repeat="obj in facility_request_data | filter: {viewingConfirmed: true}">{{obj.type}}--{{obj.viewing}}</li>
+                            </ul>
+                      </td>
+                      </tr>
+                      <tr>
+                      <td width="50%">
+                        <h3>Bookings:</h3>
+                            <ul>
+                                <li ng-repeat="obj in facility_request_data | filter:{booked: true}"> {{obj.user}}<br> {{obj.type}}</li> 
+                            </ul>
+                      </td>
+                      <td width="50%">
+                        <h3>Account Balance</h3>
+                            <ul>
+                                <li>${{myAccountTotal}}</li>
+                            </ul>
+                      </td>
+                    </tr>
+                  </table>
+                  </div>
+
+                  <div id="main" ng-if="role == 'admin'" ng-controller="adminController">
+                  <table width="50%">
+                    <tr>
+                      <td>
+                        <h3>Pending Requests (no provider yet)</h3>
+                            <ul>
+                                <li ng-repeat="obj in facility_request_data | filter:{ facilityProvider: 'n/a'}">{{ obj.type}}</li>
+                            </ul>
+                      </td>
+                      <td width="50%">
+                        <h3>Accepted Jobs</h3>
+                              <ul>
+                                <li ng-repeat="obj in facility_request_data | filter:{ booked: true, provider: '!n/a'}">{{ obj.type}}</li>
+                            </ul>
+                      </td>
+                      </tr>
+                      <tr>
+                      <td width="50%">
+                        <h3>Completed Jobs</h3>
+                            <ul>
+                                <li ng-repeat="obj in facility_request_data | filter:{ completed: true, provider: '!n/a'}"><button ng-click="payoutProvider(obj)">Payout - {{ obj.type }}) -> ${{obj.cost/100*0.8}}</button></li>
+                            </ul>
+                      </td>
+                      <td width="50%">
+                        <h3>Account Balance</h3>
+                            <ul>
+                                <li>${{myAccountTotal}}</li>
+                            </ul>
+                      </td>
+                    </tr>
+                  </table>
+                  </div>
       </div>
         
 </body>
