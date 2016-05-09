@@ -12,6 +12,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
  <script src="https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js"></script>  <!-- AngularFire -->
  <script src="scripts/indexController11.js"></script>  
  <script src="scripts/renterController2.js"></script> 
+ <script src="scripts/providerController.js"></script> 
+  <script src="scripts/adminController.js"></script> 
 
   
 <head>
@@ -48,9 +50,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
        </div>
       <!--//End-login-form-->
       <div ng-if= "isAuthenticated == true">
-            <h1>Welcome {{userEmail}} - {{role}}</h1>
-            <button ng-click="logout()">logout</button>
-
+        <div style="width: 100%; float: left; text-align: center;">
+            <h1 class="fl" style="font-size: 30px; float: none; color: #ff0000; padding-left: 7px;">Welcome {{userEmail}} - {{role}}</h1>
+                <button ng-click="logout()">logout</button>
+          </div>
             <div id="main" ng-if="role == 'renter'" ng-controller="renterController2">
             <script src="https://checkout.stripe.com/checkout.js"></script>
                 <script>
@@ -104,7 +107,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 {
                   var scope = angular.element(document.getElementById("main")).scope();
                   scope = scope.$$childHead;
-                  var numOfHours = 0;
+                  var numOfHours;
                   if(scope.facility_type == 'reception')
                   {
                     numOfHours = scope.reception_numOfHours;
@@ -130,8 +133,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <tr>
                           <td width="50%">
                           <form novalidate>
-                            <h2>Facility Type</h2>
-                              <button ng-click="receptionButtonOnClick()">Reception Hall</button>
+                            <!--<h2>Facility Type</h2-->
+                  <div style="width: 100%; float: left; text-align: center;">
+                         <h1 class="fl" style="text-transform: uppercase; color: #1b00ff; font-size: 14px; padding-left: 13px; font-weight: bold;">FIND AND BOOK A FACILITY</h1><br/><br/>
+
+                            <h1 class="fl" style="font-size: 30px; float: none; padding-left: 7px;">Facility Type</h1>
+                        
+                              <button ng-click="receptionButtonOnClick()">Reception Hall</button><br/><br/>
                               <button ng-click="banquetButtonOnClick()">Banquet Hall</button><br/>
                             <div ng-if="facility_type == 'reception'">
                               <h1>Reception Hall</h1>
@@ -150,31 +158,44 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                  <br/>
                                  <button ng-if="banquet_numOfHours > 0" onclick="purchaseButtonPressed()">Purchase</button>
                             </div>
+                      </div>
                             
                         </form>
                               
                         </td>
+                     </tr>
+
+                     <tr>
                           <td width="50%">
+                           <div style="width: 100%; float: left; color: #1b00ff; text-align: center;">
                             <h3>Requested Viewings:</h3>
                                     <ul>
-                                        <li ng-repeat="obj in facility_requests_data  | filter:{viewing: '!n/a', viewingConfirmed: false}">{{obj.type}}--{{obj.viewing}}</li>
+                                        <li ng-repeat="obj in facility_requests_data  | filter:{viewing: '!n/a', viewingConfirmed: false}">{{obj.type}}--{{obj.viewing}}</li><br/><br/>
                                     </ul>
+                            </div>
                           </td>
-                          </tr>
+                    </tr>
                         <tr>
                           <td width="50%">
+                           <div style="width: 100%; float: left; color: #1b00ff; text-align: center;">
                            <h3>Viewings you have scheduled:</h3>
                                    <ul>
-                                       <li ng-repeat="obj in facility_requests_data  | filter: {viewing: '!n/a', viewingConfirmed: true}">{{obj.type}}--{{obj.viewing}}</li>
+                                       <li ng-repeat="obj in facility_requests_data  | filter: {viewing: '!n/a', viewingConfirmed: true}">{{obj.type}}--{{obj.viewing}}</li><br/><br/>
                                    </ul>
+                            </div>
                           </td>
+                          </tr>
+                          <tr>
                           <td width="50%">
+                          <div style="width: 100%; float: left; color: #1b00ff; text-align: center;">
                             <h3>Facilities you have booked:</h3>
                                     <ul>
                                         <li ng-repeat="obj in facility_requests_data  | filter: {booked: true}">{{obj.type}}</li>
                                     </ul>
+                          </div>
                           </td>
                         </tr>
+                      
                       </table>
             </div>
                   <div id="main" ng-if="role == 'provider'" ng-controller="providerController">

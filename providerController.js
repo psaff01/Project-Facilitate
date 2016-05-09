@@ -1,5 +1,5 @@
 var app = angular.module('facApp');
- app.controller('providerCtrl', function($scope, $firebaseArray) 
+ app.controller('providerController', function($scope, $firebaseArray) 
  {
   var ref = new Firebase("https://project-facilitate.firebaseio.com/");
       var authData = ref.getAuth();

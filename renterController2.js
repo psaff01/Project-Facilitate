@@ -9,7 +9,7 @@ app.controller('renterController2', function($scope, $firebaseArray)
         $scope.facility_type = "";
         $scope.costPerHour = 0;
         $scope.banquet_numOfHours = 0;
-        $scope.reception_numOfHours = 0;
+        $scope.reception_numOfHours = "";
         $scope.reception_instructions = "";
         $scope.banquet_instructions = "";
         $scope.$apply();
@@ -36,7 +36,7 @@ app.controller('renterController2', function($scope, $firebaseArray)
    
      $scope.newServiceRequest = function(type, hours, instructions, cost)
          {
-             console.log("type" = type);
+             //console.log("type" = type);
              //save the new service request to firebase
              facility_requests.push({renter: authData.uid, type: $scope.facility_type, instructions: instructions, cost: cost, hours: hours, provider: "n/a", completed: false});
          }
@@ -45,7 +45,7 @@ app.controller('renterController2', function($scope, $firebaseArray)
          {
              this.facility_type = "reception";
              this.costPerHour = 1000;
-             this.reception_numOfHours = 0;
+             this.reception_numOfHours = "";
              this.reception_instructions = "";
          }
 
@@ -53,7 +53,7 @@ app.controller('renterController2', function($scope, $firebaseArray)
          {
              this.facility_type = "banquet";
              this.costPerHour = 500;
-             this.banquet_numOfHours = 0;
+             this.banquet_numOfHours = "";
              this.banquet_instructions = "";
          }
      });
